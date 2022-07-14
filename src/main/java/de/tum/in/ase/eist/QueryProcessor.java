@@ -44,9 +44,4 @@ public class QueryProcessor {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        QueryProcessor qp = new QueryProcessor();
-        System.out.println(qp.process("which of the following numbers is the largest: 706, 55, 67, 130"));
-    }
 }
