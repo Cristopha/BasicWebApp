@@ -2,6 +2,11 @@ package de.tum.in.ase.eist;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Service
 public class QueryProcessor {
 
@@ -15,16 +20,26 @@ public class QueryProcessor {
             return "Michel";
         } else if (query.contains("largest")) {
             int biggest = 0;
-            String[] words = query.split(" ");
-            for (int i = 0; i < words.length; i++) {
-                if (Integer.parseInt(words[i]) > biggest) {
-                    biggest = Integer.parseInt(words[i]);
+            Pattern integerPattern = Pattern.compile("-?\\d+");
+            Matcher matcher = integerPattern.matcher(query);
+
+            List<String> integerList = new ArrayList<>();
+            while (matcher.find()) {
+                if (Integer.parseInt(matcher.group()) > biggest) {
+                    biggest = Integer.parseInt(matcher.group());
                 }
+                integerList.add(matcher.group());
             }
+
             return Integer.toString(biggest);
         } else if (query.contains("plus")) {
 
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        QueryProcessor qp = new QueryProcessor();
+        System.out.println(qp.process("which of the following numbers is the largest: 589, 69"));
     }
 }
