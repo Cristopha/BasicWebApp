@@ -23,23 +23,30 @@ public class QueryProcessor {
             Pattern integerPattern = Pattern.compile("-?\\d+");
             Matcher matcher = integerPattern.matcher(query);
 
-            List<String> integerList = new ArrayList<>();
+
             while (matcher.find()) {
                 if (Integer.parseInt(matcher.group()) > biggest) {
                     biggest = Integer.parseInt(matcher.group());
                 }
-                integerList.add(matcher.group());
             }
 
             return Integer.toString(biggest);
         } else if (query.contains("plus")) {
+            int add = 0;
+            Pattern integerPattern = Pattern.compile("-?\\d+");
+            Matcher matcher = integerPattern.matcher(query);
 
+            while (matcher.find()) {
+                    add += Integer.parseInt(matcher.group());
+            }
+
+            return Integer.toString(add);
         }
         return null;
     }
 
     public static void main(String[] args) {
         QueryProcessor qp = new QueryProcessor();
-        System.out.println(qp.process("which of the following numbers is the largest: 589, 69"));
+        System.out.println(qp.process("what is 12 plus 11"));
     }
 }
