@@ -47,6 +47,6 @@ public class QueryProcessor {
 
     public static void main(String[] args) {
         QueryProcessor qp = new QueryProcessor();
-        System.out.println(qp.process("what is 12 plus 11"));
+        System.out.println(qp.process("which of the following numbers is the largest: 706, 55, 67, 130"));
     }
 }
